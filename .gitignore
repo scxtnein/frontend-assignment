@@ -1,0 +1,23 @@
+node_modules
+package-lock.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/*
+!.vscode/tasks.js
+!.vscode/extensions.json
+*.coverage
+*.coveragexml
+.idea
+
+# Optional npm cache directory
+.npm
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+*.local
