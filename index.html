@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/cms-tool.svg" />
+    <link href="/src/global.css" rel="stylesheet" />
+    <title>CMS Tool</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        const stored = localStorage.getItem('app-theme');
+        const theme = stored || 'system';
+
+        if (theme === 'system') {
+          const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)',
+          ).matches;
+          document.documentElement.classList.add(
+            prefersDark ? 'dark' : 'light',
+          );
+        } else {
+          document.documentElement.classList.add(theme);
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

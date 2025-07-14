@@ -2,15 +2,40 @@
   "name": "virtusize-assignment",
   "version": "1.0.0",
   "description": "A frontend coding challenge for Virtusize Frontend team",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "",
+    "start": "concurrently \"pnpm api\" \"pnpm dev\"",
     "api": "json-server --watch clients.json --port 4090",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix --fix-suggestions",
+    "format": "prettier --check './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "preview": "vite preview",
     "test": ""
   },
   "author": "virtusize",
   "license": "UNLICENSED",
   "dependencies": {
-    "json-server": "^1.0.0-beta.2"
+    "@tailwindcss/vite": "^4.1.11",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^15.6.0"
+  },
+  "devDependencies": {
+    "@prettier/plugin-oxc": "^0.0.4",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "concurrently": "^9.2.0",
+    "globals": "^16.3.0",
+    "json-server": "1.0.0-beta.3",
+    "oxlint": "^1.6.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
   }
 }
