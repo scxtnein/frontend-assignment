@@ -1,0 +1,152 @@
+{
+  "common": {
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "phone": "Phone",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error",
+    "actions": "Actions",
+    "previous": "Previous",
+    "next": "Next",
+    "search": "Search",
+    "noResults": "No results.",
+    "noData": "No data available",
+    "years": "years",
+    "noDate": "Not set"
+  },
+  "app": {
+    "title": "CMS Tool",
+    "companyName": "Acme Inc."
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "signUp": "Sign Up",
+    "loginSuccessful": "Login successful",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "emailPlaceholder": "hello@example.com",
+    "passwordPlaceholder": "••••••••",
+    "namePlaceholder": "John Doe",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "passwordStrength": "Password strength",
+    "passwordRequirements": "Password requirements",
+    "requirementMet": "Requirement met",
+    "requirementNotMet": "Requirement not met",
+    "loginPage": {
+      "title": "Welcome to CMS Tool",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "signupPage": {
+      "title": "Welcome to CMS Tool",
+      "haveAccount": "Already have an account?",
+      "login": "Login"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameMinLength": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMustMeet": "Password must meet all requirements"
+    },
+    "passwordChecks": {
+      "atLeast8": "At least 8 characters",
+      "atLeast1Number": "At least 1 number",
+      "atLeast1Uppercase": "At least 1 uppercase letter"
+    },
+    "toasts": {
+      "loginSuccess": "Login successful",
+      "loginError": "{{error}}",
+      "signupSuccess": "Welcome, {{userName}}!",
+      "signupError": "{{error}}",
+      "logoutSuccess": "Logged out successfully"
+    }
+  },
+  "clients": {
+    "title": "Client Management",
+    "addClient": "Add Client",
+    "editClient": "Edit Client",
+    "deleteClient": "Delete Client",
+    "deleteConfirmation": "Are you sure you want to delete this client? This action cannot be undone.",
+    "deleting": "Deleting...",
+    "noClients": "No clients",
+    "searchPlaceholder": "Search client information ...",
+    "showingClients": "Showing {{start}}-{{end}} of {{total}} clients",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "status": "Status",
+      "registered": "Registered",
+      "subscription": "Subscription",
+      "gender": "Gender",
+      "age": "Age"
+    },
+    "form": {
+      "nameRequired": "Name is required",
+      "nameMinLength": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "age": "Age",
+      "gender": "Gender",
+      "subscriptionCost": "Subscription Cost",
+      "currency": "Currency",
+      "placeholders": {
+        "name": "Enter client name",
+        "email": "Enter email address",
+        "company": "Enter company name",
+        "phone": "Enter phone number",
+        "age": "Enter age",
+        "gender": "Select gender",
+        "currency": "Currency"
+      },
+      "genderOptions": {
+        "male": "Male",
+        "female": "Female"
+      }
+    },
+    "dialog": {
+      "addTitle": "Add New Client",
+      "addDescription": "Create a new client profile. Fill in all required information below.",
+      "editTitle": "Edit Client",
+      "editDescription": "Update client information. Make changes to the fields below.",
+      "viewTitle": "Client Details",
+      "viewDescription": "View complete information for this client.",
+      "updateClient": "Update Client"
+    },
+    "deleteDialog": {
+      "title": "Delete Client",
+      "description": "Are you sure you want to delete {{clientName}}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleting": "Deleting..."
+    },
+    "toasts": {
+      "addSuccess": "Client \"{{clientName}}\" added successfully!",
+      "addError": "Failed to add client: {{error}}",
+      "updateSuccess": "Client \"{{clientName}}\" updated successfully!",
+      "updateError": "Failed to update client: {{error}}",
+      "deleteSuccess": "Client deleted successfully!",
+      "deleteError": "Failed to delete client: {{error}}",
+      "addFormError": "Failed to add client. Please try again.",
+      "updateFormError": "Failed to update client. Please try again."
+    },
+    "sections": {
+      "personalInfo": "Personal Information",
+      "subscriptionInfo": "Subscription Details"
+    }
+  }
+}

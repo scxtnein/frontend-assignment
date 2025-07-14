@@ -1,0 +1,152 @@
+{
+  "common": {
+    "name": "名前",
+    "email": "メール",
+    "company": "会社",
+    "phone": "電話番号",
+    "add": "追加",
+    "edit": "編集",
+    "delete": "削除",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "success": "成功",
+    "error": "エラー",
+    "actions": "操作",
+    "previous": "前へ",
+    "next": "次へ",
+    "search": "検索",
+    "noResults": "結果がありません。",
+    "noData": "データがありません",
+    "years": "歳",
+    "noDate": "未設定"
+  },
+  "app": {
+    "title": "CMS ツール",
+    "companyName": "Acme Inc."
+  },
+  "auth": {
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "signUp": "サインアップ",
+    "loginSuccessful": "ログインに成功しました",
+    "email": "メール",
+    "password": "パスワード",
+    "name": "名前",
+    "emailPlaceholder": "hello@example.com",
+    "passwordPlaceholder": "••••••••",
+    "namePlaceholder": "田中 太郎",
+    "showPassword": "パスワードを表示",
+    "hidePassword": "パスワードを非表示",
+    "passwordStrength": "パスワード強度",
+    "passwordRequirements": "パスワード要件",
+    "requirementMet": "要件を満たしています",
+    "requirementNotMet": "要件を満たしていません",
+    "loginPage": {
+      "title": "CMS ツールへようこそ",
+      "noAccount": "アカウントをお持ちでない場合は",
+      "signUp": "サインアップ"
+    },
+    "signupPage": {
+      "title": "CMS ツールへようこそ",
+      "haveAccount": "すでにアカウントをお持ちの場合は",
+      "login": "ログイン"
+    },
+    "validation": {
+      "nameRequired": "名前は必須です",
+      "nameMinLength": "名前は2文字以上で入力してください",
+      "emailRequired": "メールアドレスは必須です",
+      "emailInvalid": "有効なメールアドレスを入力してください",
+      "passwordRequired": "パスワードは必須です",
+      "passwordMustMeet": "パスワードはすべての要件を満たす必要があります"
+    },
+    "passwordChecks": {
+      "atLeast8": "8 文字以上",
+      "atLeast1Number": "数字を1文字以上",
+      "atLeast1Uppercase": "大文字を1文字以上"
+    },
+    "toasts": {
+      "loginSuccess": "ログイン成功",
+      "loginError": "{{error}}",
+      "signupSuccess": "ようこそ、{{userName}} さん！",
+      "signupError": "{{error}}",
+      "logoutSuccess": "ログアウトしました"
+    }
+  },
+  "clients": {
+    "title": "クライアント管理",
+    "addClient": "クライアント追加",
+    "editClient": "クライアント編集",
+    "deleteClient": "クライアント削除",
+    "deleteConfirmation": "このクライアントを削除してもよろしいですか？この操作は元に戻せません。",
+    "deleting": "削除中...",
+    "noClients": "クライアントがありません",
+    "searchPlaceholder": "クライアント情報を検索...",
+    "showingClients": "{{total}} 件中 {{start}}-{{end}} 件を表示",
+    "table": {
+      "name": "名前",
+      "email": "メール",
+      "company": "会社",
+      "phone": "電話番号",
+      "status": "ステータス",
+      "registered": "登録日",
+      "subscription": "サブスクリプション",
+      "gender": "性別",
+      "age": "年齢"
+    },
+    "form": {
+      "nameRequired": "名前は必須です",
+      "nameMinLength": "名前は2文字以上で入力してください",
+      "emailRequired": "メールアドレスは必須です",
+      "emailInvalid": "有効なメールアドレスを入力してください",
+      "age": "年齢",
+      "gender": "性別",
+      "subscriptionCost": "サブスクリプション料金",
+      "currency": "通貨",
+      "placeholders": {
+        "name": "クライアント名を入力",
+        "email": "メールアドレスを入力",
+        "company": "会社名を入力",
+        "phone": "電話番号を入力",
+        "age": "年齢を入力",
+        "gender": "性別を選択",
+        "currency": "通貨"
+      },
+      "genderOptions": {
+        "male": "男性",
+        "female": "女性"
+      }
+    },
+    "dialog": {
+      "addTitle": "新しいクライアントを追加",
+      "addDescription": "新しいクライアントプロファイルを作成します。以下の必要な情報をすべて入力してください。",
+      "editTitle": "クライアント編集",
+      "editDescription": "クライアント情報を更新してください。以下のフィールドに変更を加えてください。",
+      "viewTitle": "クライアント詳細",
+      "viewDescription": "このクライアントの完全な情報を表示します。",
+      "updateClient": "クライアント更新"
+    },
+    "deleteDialog": {
+      "title": "クライアント削除",
+      "description": "{{clientName}} を削除してもよろしいですか？この操作は元に戻せません。",
+      "cancel": "キャンセル",
+      "delete": "削除",
+      "deleting": "削除中..."
+    },
+    "toasts": {
+      "addSuccess": "クライアント \"{{clientName}}\" を正常に追加しました！",
+      "addError": "クライアントの追加に失敗しました: {{error}}",
+      "updateSuccess": "クライアント \"{{clientName}}\" を正常に更新しました！",
+      "updateError": "クライアントの更新に失敗しました: {{error}}",
+      "deleteSuccess": "クライアントを正常に削除しました！",
+      "deleteError": "クライアントの削除に失敗しました: {{error}}",
+      "addFormError": "クライアントの追加に失敗しました。もう一度お試しください。",
+      "updateFormError": "クライアントの更新に失敗しました。もう一度お試しください。"
+    },
+    "sections": {
+      "personalInfo": "個人情報",
+      "subscriptionInfo": "サブスクリプション詳細"
+    }
+  }
+}

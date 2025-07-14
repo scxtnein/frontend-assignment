@@ -1,0 +1,39 @@
+import { SignupForm } from '@/lib/auth/components/signup-form/signup-form';
+import { Link } from '@tanstack/react-router';
+import { GalleryVerticalEndIcon } from 'lucide-react';
+import { SettingsToggles } from '@/shared/components/ui/settings-toggles';
+import { useI18n } from '@/lib/i18n';
+
+export const SignupPage = () => {
+  const { t } = useI18n();
+
+  return (
+    <div className='bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10 relative'>
+      <div className='absolute top-6 right-6'>
+        <SettingsToggles />
+      </div>
+      <div className='w-full max-w-sm flex flex-col gap-6'>
+        <div className='flex flex-col items-center gap-2'>
+          <div className='flex flex-col items-center gap-2 font-medium'>
+            <div className='flex size-8 items-center justify-center rounded-md'>
+              <GalleryVerticalEndIcon className='size-6' />
+            </div>
+            <span className='sr-only'>{t('app.companyName')}</span>
+          </div>
+          <h1 className='text-xl font-bold'>{t('auth.signupPage.title')}</h1>
+        </div>
+
+        <SignupForm />
+
+        <div className='text-center text-sm'>
+          <span className='text-muted-foreground'>
+            {t('auth.signupPage.haveAccount')}
+          </span>{' '}
+          <Link to='/login' className='underline underline-offset-4'>
+            {t('auth.signupPage.login')}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
