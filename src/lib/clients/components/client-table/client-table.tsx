@@ -24,7 +24,12 @@ export const ClientTable = () => {
   const { isLoading, error, table } = useClientTable(columns);
 
   if (isLoading) return <div>{t('common.loading')}</div>;
-  if (error) return <div>{t('common.error')}: {error.message}</div>;
+  if (error)
+    return (
+      <div>
+        {t('common.error')}: {error.message}
+      </div>
+    );
 
   return (
     <div className='space-y-4'>

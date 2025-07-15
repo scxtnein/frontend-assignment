@@ -51,7 +51,7 @@ export const AddClient = () => {
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
           <ClientFormFields form={form} />
-          
+
           {/* Submit Button */}
           <form.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}

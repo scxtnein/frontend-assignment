@@ -21,7 +21,10 @@ export const useAddClientForm = (onSuccess?: () => void) => {
         // Convert values to proper types for the payload
         const payload = {
           ...value,
-          age: typeof value.age === 'string' ? parseInt(value.age) || 0 : value.age,
+          age:
+            typeof value.age === 'string'
+              ? parseInt(value.age) || 0
+              : value.age,
           subscriptionCost: parseFloat(value.subscriptionCost),
         };
         await mutateAsync(payload);

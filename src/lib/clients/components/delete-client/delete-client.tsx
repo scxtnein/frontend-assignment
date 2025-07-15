@@ -40,13 +40,17 @@ export const DeleteClient = ({ client }: DeleteClientProps) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t('clients.deleteDialog.cancel')}</AlertDialogCancel>
+          <AlertDialogCancel>
+            {t('clients.deleteDialog.cancel')}
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={() => handleDelete(client.id)}
             disabled={isPending}
             className='bg-destructive text-destructive-foreground hover:bg-destructive/90'
           >
-            {isPending ? t('clients.deleteDialog.deleting') : t('clients.deleteDialog.delete')}
+            {isPending
+              ? t('clients.deleteDialog.deleting')
+              : t('clients.deleteDialog.delete')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

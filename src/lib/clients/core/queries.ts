@@ -62,7 +62,9 @@ export const useAddClient = () => {
     },
     onSuccess: (newClient) => {
       queryClient.invalidateQueries({ queryKey: CLIENT_QUERY_KEYS.all });
-      toast.success(t('clients.toasts.addSuccess', { clientName: newClient.name }));
+      toast.success(
+        t('clients.toasts.addSuccess', { clientName: newClient.name }),
+      );
     },
     onError: (error) => {
       toast.error(t('clients.toasts.addError', { error: error.message }));
@@ -79,9 +81,10 @@ export const useEditClient = () => {
       const updatedClient = {
         ...payload,
         // Convert number to string for JSON server
-        subscriptionCost: typeof payload.subscriptionCost === 'number' 
-          ? payload.subscriptionCost.toFixed(2) 
-          : payload.subscriptionCost,
+        subscriptionCost:
+          typeof payload.subscriptionCost === 'number'
+            ? payload.subscriptionCost.toFixed(2)
+            : payload.subscriptionCost,
       };
 
       const response = await kyClient
@@ -91,7 +94,9 @@ export const useEditClient = () => {
     },
     onSuccess: (updatedClient) => {
       queryClient.invalidateQueries({ queryKey: CLIENT_QUERY_KEYS.all });
-      toast.success(t('clients.toasts.updateSuccess', { clientName: updatedClient.name }));
+      toast.success(
+        t('clients.toasts.updateSuccess', { clientName: updatedClient.name }),
+      );
     },
     onError: (error) => {
       toast.error(t('clients.toasts.updateError', { error: error.message }));

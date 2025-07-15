@@ -17,7 +17,7 @@ interface ClientFormFieldsProps {
 
 export const ClientFormFields = ({ form }: ClientFormFieldsProps) => {
   const { t } = useI18n();
-  
+
   return (
     <div className='flex flex-col gap-6'>
       {/* Name Field */}
@@ -136,7 +136,9 @@ export const ClientFormFields = ({ form }: ClientFormFieldsProps) => {
                   }
                 >
                   <SelectTrigger id={field.name} className='w-full'>
-                    <SelectValue placeholder={t('clients.form.placeholders.gender')} />
+                    <SelectValue
+                      placeholder={t('clients.form.placeholders.gender')}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {GENDER_OPTIONS.map((gender) => (
@@ -154,16 +156,23 @@ export const ClientFormFields = ({ form }: ClientFormFieldsProps) => {
 
       {/* Subscription Cost with Currency Field */}
       <div className='grid gap-3'>
-        <Label htmlFor='subscriptionCost'>{t('clients.form.subscriptionCost')}</Label>
+        <Label htmlFor='subscriptionCost'>
+          {t('clients.form.subscriptionCost')}
+        </Label>
         <div className='flex rounded-md shadow-sm'>
-          <form.Field name='currency' validators={clientFormValidators.currency}>
+          <form.Field
+            name='currency'
+            validators={clientFormValidators.currency}
+          >
             {(field: any) => (
               <Select
                 value={field.state.value}
                 onValueChange={(val) => field.handleChange(val)}
               >
                 <SelectTrigger className='w-32 rounded-e-none border-r-0'>
-                  <SelectValue placeholder={t('clients.form.placeholders.currency')} />
+                  <SelectValue
+                    placeholder={t('clients.form.placeholders.currency')}
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.values(CURRENCY_OPTIONS).map((currency) => (

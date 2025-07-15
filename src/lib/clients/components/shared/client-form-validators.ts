@@ -8,18 +8,18 @@ export const clientFormValidators = {
       return undefined;
     },
   },
-  
+
   company: {
     onChange: ({ value }: { value: string }) => {
       if (!value) return 'Company is required';
       return undefined;
     },
   },
-  
+
   age: {
     onSubmit: ageSchema,
   },
-  
+
   gender: {
     onChange: ({ value }: { value: string }) => {
       if (!value || value === '') return 'Gender is required';
@@ -34,14 +34,14 @@ export const clientFormValidators = {
       return undefined;
     },
   },
-  
+
   currency: {
     onChange: ({ value }: { value: string }) => {
       if (!value) return 'Currency is required';
       return undefined;
     },
   },
-  
+
   subscriptionCost: {
     onChange: ({ value }: { value: string }) => {
       if (!value) return 'Subscription cost is required';

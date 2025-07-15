@@ -22,7 +22,10 @@ export const useEditClientForm = (client: Client, onSuccess?: () => void) => {
         const payload = {
           ...client, // Keep all existing fields
           ...value,
-          age: typeof value.age === 'string' ? parseInt(value.age) || 0 : value.age,
+          age:
+            typeof value.age === 'string'
+              ? parseInt(value.age) || 0
+              : value.age,
           subscriptionCost: parseFloat(value.subscriptionCost),
         };
         await mutateAsync(payload);

@@ -42,7 +42,7 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ThemeProvider defaultTheme="system">
+      <ThemeProvider defaultTheme='system'>
         <I18nProvider>
           <QueryClientProvider client={queryClient}>
             <AuthProvider>

@@ -57,10 +57,10 @@ export const useClientTable = (columns: ColumnDef<Client>[]) => {
   useEffect(() => {
     const { rows } = table.getFilteredRowModel();
     const pageCount = table.getPageCount();
-    
+
     if (rows.length > 0 && pagination.pageIndex >= pageCount) {
       // Move to last valid page
-      setPagination(prev => ({
+      setPagination((prev) => ({
         ...prev,
         pageIndex: Math.max(0, pageCount - 1),
       }));

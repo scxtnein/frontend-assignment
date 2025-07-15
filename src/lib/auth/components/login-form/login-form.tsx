@@ -14,6 +14,10 @@ export const LoginForm = () => {
   const { form } = useLoginForm();
   const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -21,6 +25,8 @@ export const LoginForm = () => {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      role='form'
+      data-testid='login-form'
     >
       <div className='flex flex-col gap-6'>
         <form.Subscribe
@@ -71,7 +77,7 @@ export const LoginForm = () => {
                             <button
                               className='text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 hover:cursor-pointer'
                               type='button'
-                              onClick={() => setShowPassword(!showPassword)}
+                              onClick={togglePasswordVisibility}
                               aria-label={
                                 showPassword
                                   ? t('auth.hidePassword')
@@ -79,6 +85,7 @@ export const LoginForm = () => {
                               }
                               aria-pressed={showPassword}
                               aria-controls='password'
+                              data-testid='password-toggle'
                             >
                               {showPassword ? (
                                 <EyeOffIcon size={16} aria-hidden='true' />

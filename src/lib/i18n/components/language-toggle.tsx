@@ -20,11 +20,13 @@ export const LanguageToggle = () => {
       className={language === 'jp' ? 'bg-primary text-primary-foreground' : ''}
     >
       <Languages className='h-[1.2rem] w-[1.2rem]' />
-      <span className={`absolute -bottom-1 -right-1 border rounded text-[10px] px-1 py-0 min-w-[16px] text-center ${
-        language === 'jp' 
-          ? 'bg-background text-foreground' 
-          : 'bg-background text-foreground'
-      }`}>
+      <span
+        className={`absolute -bottom-1 -right-1 border rounded text-[10px] px-1 py-0 min-w-[16px] text-center ${
+          language === 'jp'
+            ? 'bg-background text-foreground'
+            : 'bg-background text-foreground'
+        }`}
+      >
         {language.toUpperCase()}
       </span>
       <span className='sr-only'>
