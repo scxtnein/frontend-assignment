@@ -6,6 +6,7 @@ import {
 } from '@/lib/auth/core/schemas';
 import { useAuthProvider } from '@/lib/auth/hooks/use-auth-provider';
 import { kyClient } from '@/shared/core/ky-client';
+import { handleHttpError } from '@/shared/utils/http-error-handler';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useNavigate } from '@tanstack/react-router';
@@ -57,8 +58,14 @@ export const useSignup = () => {
       // Short delay after successful signup to avoid flashing from json-server new entry
       toast.success(t('auth.toasts.signupSuccess', { userName: user.name }));
     },
-    onError: (error) => {
-      toast.error(t('auth.toasts.signupError', { error: error.message }));
+    onError: async (error) => {
+      if (error instanceof ErrorAlreadyExists) {
+        toast.error(error.message);
+        return;
+      }
+
+      const apiError = await handleHttpError(error, t);
+      toast.error(apiError.message);
     },
     onSettled: () => {
       setIsLoading(false);

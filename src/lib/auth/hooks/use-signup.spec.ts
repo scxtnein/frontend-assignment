@@ -14,8 +14,10 @@ import { useAuthProvider } from '@/lib/auth/hooks/use-auth-provider';
 import { useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
 import { useI18n } from '@/lib/i18n';
+import { handleHttpError } from '@/shared/utils/http-error-handler';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorAlreadyExists } from '@/lib/auth/core/errors';
+import { HTTPError } from 'ky';
 
 // Mock all dependencies
 vi.mock('@/shared/core/ky-client');
@@ -28,6 +30,7 @@ vi.mock('sonner', () => ({
   },
 }));
 vi.mock('@/lib/i18n');
+vi.mock('@/shared/utils/http-error-handler');
 vi.mock('uid', () => ({
   uid: vi.fn(),
 }));
@@ -44,6 +47,7 @@ const mockToast = toast as unknown as {
   error: MockedFunction<any>;
 };
 const mockUseI18n = useI18n as MockedFunction<any>;
+const mockHandleHttpError = handleHttpError as MockedFunction<any>;
 
 describe('useSignup', () => {
   const mockSetIsLoading = vi.fn();
@@ -190,6 +194,10 @@ describe('useSignup', () => {
       json: vi.fn().mockResolvedValue(invalidResponse),
     });
 
+    mockHandleHttpError.mockResolvedValue({
+      message: 'An unexpected error occurred. Please try again.',
+    });
+
     // Act: Attempt signup with invalid server response
     const { result } = renderHook(() => useSignup(), {
       wrapper: createWrapper(),
@@ -202,9 +210,13 @@ describe('useSignup', () => {
     });
 
     expect(result.current.error?.message).toBe('Invalid response from server');
-    expect(mockToast.error).toHaveBeenCalledWith(
-      'Signup failed: Invalid response from server',
-    );
+
+    await waitFor(() => {
+      expect(mockToast.error).toHaveBeenCalledWith(
+        'An unexpected error occurred. Please try again.',
+      );
+    });
+
     expect(mockKyClient.post).not.toHaveBeenCalled();
     expect(mockSetUser).not.toHaveBeenCalled();
     expect(mockNavigate).not.toHaveBeenCalled();
@@ -219,6 +231,10 @@ describe('useSignup', () => {
       json: vi.fn().mockRejectedValue(networkError),
     });
 
+    mockHandleHttpError.mockResolvedValue({
+      message: 'An unexpected error occurred. Please try again.',
+    });
+
     // Act: Attempt signup during network failure
     const { result } = renderHook(() => useSignup(), {
       wrapper: createWrapper(),
@@ -230,10 +246,14 @@ describe('useSignup', () => {
       expect(result.current.isError).toBe(true);
     });
 
-    expect(result.current.error?.message).toBe('Network request failed');
-    expect(mockToast.error).toHaveBeenCalledWith(
-      'Signup failed: Network request failed',
-    );
+    expect(mockHandleHttpError).toHaveBeenCalledWith(networkError, mockT);
+
+    await waitFor(() => {
+      expect(mockToast.error).toHaveBeenCalledWith(
+        'An unexpected error occurred. Please try again.',
+      );
+    });
+
     expect(mockKyClient.post).not.toHaveBeenCalled();
     expect(mockSetUser).not.toHaveBeenCalled();
     expect(mockNavigate).not.toHaveBeenCalled();
@@ -253,6 +273,10 @@ describe('useSignup', () => {
       json: vi.fn().mockRejectedValue(creationError),
     });
 
+    mockHandleHttpError.mockResolvedValue({
+      message: 'An unexpected error occurred. Please try again.',
+    });
+
     // Act: Attempt signup with user creation failure
     const { result } = renderHook(() => useSignup(), {
       wrapper: createWrapper(),
@@ -264,10 +288,14 @@ describe('useSignup', () => {
       expect(result.current.isError).toBe(true);
     });
 
-    expect(result.current.error?.message).toBe('User creation failed');
-    expect(mockToast.error).toHaveBeenCalledWith(
-      'Signup failed: User creation failed',
-    );
+    expect(mockHandleHttpError).toHaveBeenCalledWith(creationError, mockT);
+
+    await waitFor(() => {
+      expect(mockToast.error).toHaveBeenCalledWith(
+        'An unexpected error occurred. Please try again.',
+      );
+    });
+
     expect(mockSetUser).not.toHaveBeenCalled();
     expect(mockNavigate).not.toHaveBeenCalled();
     expect(mockSetIsLoading).toHaveBeenCalledWith(false);
@@ -355,6 +383,10 @@ describe('useSignup', () => {
       json: vi.fn().mockResolvedValue(invalidUserResponse),
     });
 
+    mockHandleHttpError.mockResolvedValue({
+      message: 'An unexpected error occurred. Please try again.',
+    });
+
     // Act: Attempt signup with invalid user creation response
     const { result } = renderHook(() => useSignup(), {
       wrapper: createWrapper(),
@@ -367,9 +399,108 @@ describe('useSignup', () => {
     });
 
     expect(result.current.error).toBeDefined();
-    expect(mockToast.error).toHaveBeenCalled();
+
+    await waitFor(() => {
+      expect(mockToast.error).toHaveBeenCalled();
+    });
+
     expect(mockSetUser).not.toHaveBeenCalled();
     expect(mockNavigate).not.toHaveBeenCalled();
     expect(mockSetIsLoading).toHaveBeenCalledWith(false);
+  });
+
+  it('should handle 404 HTTP error during email check', async () => {
+    // Arrange: Set up 404 error scenario
+    const mockResponse = new Response('{}', {
+      status: 404,
+      statusText: 'Not Found',
+    });
+    const httpError = new HTTPError(mockResponse, {} as any, {} as any);
+
+    mockKyClient.get.mockReturnValue({
+      json: vi.fn().mockRejectedValue(httpError),
+    });
+
+    mockHandleHttpError.mockResolvedValue({
+      message: 'The requested resource could not be found.',
+    });
+
+    // Act: Attempt signup resulting in 404
+    const { result } = renderHook(() => useSignup(), {
+      wrapper: createWrapper(),
+    });
+    result.current.mutate(signupPayload);
+
+    // Assert: Verify error handling
+    await waitFor(() => {
+      expect(result.current.isError).toBe(true);
+    });
+
+    expect(mockHandleHttpError).toHaveBeenCalledWith(httpError, mockT);
+    expect(mockToast.error).toHaveBeenCalledWith('The requested resource could not be found.');
+  });
+
+  it('should handle 500 HTTP error during user creation', async () => {
+    // Arrange: Set up successful email check but 500 error on creation
+    mockKyClient.get.mockReturnValue({
+      json: vi.fn().mockResolvedValue([]), // No existing users
+    });
+
+    const mockResponse = new Response('{}', {
+      status: 500,
+      statusText: 'Internal Server Error',
+    });
+    const httpError = new HTTPError(mockResponse, {} as any, {} as any);
+
+    mockKyClient.post.mockReturnValue({
+      json: vi.fn().mockRejectedValue(httpError),
+    });
+
+    mockHandleHttpError.mockResolvedValue({
+      message: 'Something went wrong on our end. Please try again later.',
+    });
+
+    // Act: Attempt signup resulting in 500
+    const { result } = renderHook(() => useSignup(), {
+      wrapper: createWrapper(),
+    });
+    result.current.mutate(signupPayload);
+
+    // Assert: Verify server error handling
+    await waitFor(() => {
+      expect(result.current.isError).toBe(true);
+    });
+
+    expect(mockHandleHttpError).toHaveBeenCalledWith(httpError, mockT);
+    expect(mockToast.error).toHaveBeenCalledWith('Something went wrong on our end. Please try again later.');
+  });
+
+  it('should handle ErrorAlreadyExists without calling handleHttpError', async () => {
+    // Arrange: Set up existing user scenario
+    const existingUser = {
+      id: '999',
+      email: signupPayload.email,
+      name: 'Existing User',
+      password: 'somepassword',
+    };
+
+    mockKyClient.get.mockReturnValue({
+      json: vi.fn().mockResolvedValue([existingUser]),
+    });
+
+    // Act: Attempt signup with existing email
+    const { result } = renderHook(() => useSignup(), {
+      wrapper: createWrapper(),
+    });
+    result.current.mutate(signupPayload);
+
+    // Assert: Verify ErrorAlreadyExists handling
+    await waitFor(() => {
+      expect(result.current.isError).toBe(true);
+    });
+
+    expect(result.current.error).toBeInstanceOf(ErrorAlreadyExists);
+    expect(mockToast.error).toHaveBeenCalledWith('Email already exists');
+    expect(mockHandleHttpError).not.toHaveBeenCalled();
   });
 });

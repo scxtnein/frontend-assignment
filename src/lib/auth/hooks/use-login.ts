@@ -5,6 +5,7 @@ import {
 } from '@/lib/auth/core/schemas';
 import { useAuthProvider } from '@/lib/auth/hooks/use-auth-provider';
 import { kyClient } from '@/shared/core/ky-client';
+import { handleAuthError } from '@/shared/utils/http-error-handler';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
@@ -45,8 +46,9 @@ export const useLogin = () => {
       toast.success(t('auth.toasts.loginSuccess'));
       navigate({ to: '/' });
     },
-    onError: (error) => {
-      toast.error(t('auth.toasts.loginError', { error: error.message }));
+    onError: async (error) => {
+      const errorMessage = await handleAuthError(error, t);
+      toast.error(errorMessage);
     },
     onSettled: () => {
       setIsLoading(false);

@@ -148,5 +148,21 @@
       "personalInfo": "Personal Information",
       "subscriptionInfo": "Subscription Details"
     }
+  },
+  "errors": {
+    "http": {
+      "badRequest": "Invalid request. Please check your input and try again.",
+      "unauthorized": "You are not authorized to perform this action.",
+      "forbidden": "Access denied. You don't have permission to access this resource.",
+      "notFound": "The requested resource could not be found.",
+      "validationError": "Please check your input and try again.",
+      "tooManyRequests": "Too many requests. Please try again later.",
+      "serverError": "Something went wrong on our end. Please try again later.",
+      "genericError": "An unexpected error occurred. Please try again."
+    },
+    "auth": {
+      "invalidCredentials": "Invalid email or password. Please try again.",
+      "invalidInput": "Please check your login information and try again."
+    }
   }
 }

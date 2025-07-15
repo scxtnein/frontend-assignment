@@ -5,6 +5,7 @@ import {
   type Client,
 } from '@/lib/clients/core/schemas';
 import { kyClient } from '@/shared/core/ky-client';
+import { handleHttpError } from '@/shared/utils/http-error-handler';
 import {
   queryOptions,
   useMutation,
@@ -66,8 +67,9 @@ export const useAddClient = () => {
         t('clients.toasts.addSuccess', { clientName: newClient.name }),
       );
     },
-    onError: (error) => {
-      toast.error(t('clients.toasts.addError', { error: error.message }));
+    onError: async (error) => {
+      const apiError = await handleHttpError(error, t);
+      toast.error(apiError.message);
     },
   });
 };
@@ -98,8 +100,9 @@ export const useEditClient = () => {
         t('clients.toasts.updateSuccess', { clientName: updatedClient.name }),
       );
     },
-    onError: (error) => {
-      toast.error(t('clients.toasts.updateError', { error: error.message }));
+    onError: async (error) => {
+      const apiError = await handleHttpError(error, t);
+      toast.error(apiError.message);
     },
   });
 };
@@ -116,8 +119,9 @@ export const useDeleteClient = () => {
       queryClient.invalidateQueries({ queryKey: CLIENT_QUERY_KEYS.all });
       toast.success(t('clients.toasts.deleteSuccess'));
     },
-    onError: (error) => {
-      toast.error(t('clients.toasts.deleteError', { error: error.message }));
+    onError: async (error) => {
+      const apiError = await handleHttpError(error, t);
+      toast.error(apiError.message);
     },
   });
 };
